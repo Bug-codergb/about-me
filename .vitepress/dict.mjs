@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-const exclusion = [".vitepress", "node_modules"];
+const exclusion = [".vitepress", "node_modules",".gitignore",".git"];
 const rootPath = process.cwd();
 
 function getPageJson(path) {
@@ -15,8 +15,9 @@ function getPageJson(path) {
 }
 
 let nav = [];
+let sidebar = {}
 
-function generateRoute(rootPath, nav, recur) {
+function generateRoute(rootPath, parentPath,nav, recur) {
   try {
     const files = fs.readdirSync(rootPath);
    
@@ -29,12 +30,31 @@ function generateRoute(rootPath, nav, recur) {
           const jsonData = getPageJson(jsonPath);
           let route = {
             text: jsonData ? jsonData.name : `${file}`,
-            link: `/${file}`,
+            link: `${parentPath}${file}/index.html`,
             children: [],
           };
           recur++;
-          const n = generateRoute(filePath, route.children, recur);
-          route.children = n;
+          //生成侧边栏  
+          if(jsonData && jsonData.sidebar){
+            if(sidebar[parentPath]){
+              sidebar[parentPath][0].items.push({
+                text:jsonData.name,
+                link:route.link
+              })
+            }else{
+              sidebar[parentPath]=[
+                {
+                  items:[
+                    {text:jsonData.name,"link":route.link}
+                  ]
+                }
+              ]
+            }
+            
+          }
+
+          const n = generateRoute(filePath, `${parentPath}${file}/`,[], recur);
+          route.children = n && n.length!==0 ? n : undefined;
           nav.push(route);
           
         } catch (e) {
@@ -46,8 +66,13 @@ function generateRoute(rootPath, nav, recur) {
   } catch (e) {
   }
 }
-generateRoute(rootPath, nav, 0);
+generateRoute(rootPath,"/", nav, 0);
+
+console.log(JSON.stringify(nav))
+console.log("***********")
+console.log(JSON.stringify(sidebar))
 export {
-  nav
+  nav,
+  sidebar
 }
 
