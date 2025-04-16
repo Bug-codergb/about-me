@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 import { nav,sidebar } from "./dict.mjs"
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "郭斌的文档库",
+  title: "codergb的知识库",
   description: "记录学习历程",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
