@@ -18,7 +18,10 @@ jobs:
       
       - name: Build
         run: npm run docs:build
-      
+
+      - name: List dist directory contents  # 调试步骤，确认 dist 目录是否存在且有文件
+        run: ls -la .vitepress/dist
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
