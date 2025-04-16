@@ -1,7 +1,8 @@
-import { defineConfig } from 'vitepress'
+  import { defineConfig } from 'vitepress'
 import { nav,sidebar } from "./dict.mjs"
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base:"/about-me",
   title: "codergb的知识库",
   description: "记录学习历程",
   themeConfig: {
