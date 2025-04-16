@@ -10,7 +10,7 @@ function getPageJson(path) {
     const jsonData = JSON.parse(data); // 解析 JSON 数据
     return jsonData;
   } catch (e) {
-    return null;
+    return null
   }
 }
 
