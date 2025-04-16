@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-const exclusion = [".vitepress", "node_modules",".gitignore",".git",".idea","docs"];
+const exclusion = [".vitepress", "node_modules",".gitignore",".git",".idea","docs",".github"];
 const rootPath = process.cwd();
 
 function getPageJson(path) {
