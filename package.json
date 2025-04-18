@@ -15,6 +15,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "unplugin-auto-import": "^19.1.2",
     "vitepress": "^1.6.3"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
+    "element-plus": "^2.9.7",
+    "unplugin-element-plus": "^0.9.1",
+    "unplugin-vue-components": "^28.5.0"
   }
 }

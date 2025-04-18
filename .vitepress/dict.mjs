@@ -68,9 +68,6 @@ function generateRoute(rootPath, parentPath,nav, recur) {
 }
 generateRoute(rootPath,"/", nav, 0);
 
-console.log(JSON.stringify(nav))
-console.log("***********")
-console.log(JSON.stringify(sidebar))
 export {
   nav,
   sidebar
