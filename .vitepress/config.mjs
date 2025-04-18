@@ -6,6 +6,9 @@ export default defineConfig({
   base:"/about-me",
   title: "codergb的知识库",
   description: "记录学习历程",
+  head:[
+    ['link', { rel: 'icon', href: '/about-me/favicon.ico' }], // 默认路径
+  ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -30,5 +33,5 @@ export default defineConfig({
     darkModeSwitchLabel: '深色模式',
     sidebarMenuLabel: '菜单',
     returnToTopLabel: '返回顶部'
-  }
+  },
 })
