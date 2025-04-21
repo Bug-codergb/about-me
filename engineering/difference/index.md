@@ -35,4 +35,7 @@
     - **生产模式：**
         - Vite：使用 Rollup 进行打包（Rollup 以 Tree Shaking 高效著称）。
         - Webpack：自研打包机制，功能更灵活但配置复杂。
+## 项目搭建
+- [Vite :](https://github.com/Bug-codergb/gb-webpack/tree/master/gb-vite-client) 通过基本配置从0到1搭建项目
+- [Webpack:](https://github.com/Bug-codergb/gb-webpack/tree/master/gb-webpack-client) 通过基本配置从0到1搭建项目
 
