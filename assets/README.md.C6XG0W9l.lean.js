@@ -1,0 +1,1 @@
+import{_ as t,c as a,o as i,b0 as l}from"./chunks/framework.yGdRLqI0.js";const m=JSON.parse('{"title":"记录一下平时将常用到的知识","description":"","frontmatter":{},"headers":[],"relativePath":"README.md","filePath":"README.md"}'),r={name:"README.md"};function o(_,e,c,n,s,p){return i(),a("div",null,e[0]||(e[0]=[l("",2)]))}const x=t(r,[["render",o]]);export{m as __pageData,x as default};
