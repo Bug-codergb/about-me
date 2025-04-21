@@ -109,11 +109,8 @@ const fn=()=>{
     if(isVisible && img.getAttribute('data-loaded') === null){
         img.setAttribute("src","/about-me/6.jpg")    
         renderImg(item.url).then(()=>{
-            setTimeout(()=>{
-
-img.setAttribute("src",item.url)
+            img.setAttribute("src",item.url)
             img.setAttribute("data-loaded","1")
-            },500)
         }).catch((e)=>{
             img.setAttribute("src","/about-me/6.jpg")
             img.setAttribute("data-loaded","1")
