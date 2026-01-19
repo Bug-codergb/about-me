@@ -3,8 +3,8 @@
 layout: home
 
 hero:
-  name: "codergb的知识库"
-  text: "记录前端学习知识"
+  name: "Guobin的知识库"
+  text: "记录知识"
   tagline: 我的其它项目
   actions:
     - theme: brand

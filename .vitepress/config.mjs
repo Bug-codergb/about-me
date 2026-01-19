@@ -6,7 +6,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 export default defineConfig({
   lang: 'zh-CN',
   base:"/about-me",
-  title: "ff知识库",
+  title: "知识库",
   description: "fff",
   head:[
     ['link', { rel: 'icon', href: '/about-me/favicon.ico' }], // 默认路径
