@@ -47,6 +47,22 @@ aside: false
     </a>
     <p>civil-service-exam</p>
   </li>
+  <li>
+    <a href="http://www.scs.gov.cn/" target="_blank"><strong>国家公务员局</strong> (scs.gov.cn)</a>
+    <p>国考官方唯一公告与报名平台，发布最权威的招考政策与职位表。</p>
+  </li>
+  <li>
+    <a href="https://github.com/rednaxela2018/civil-service-exam-1" target="_blank"><strong>考试攻略 | 公务员 | 事业单位</strong></a>
+    <p>提供多维度的考公备考思维导图、知识点总结及面试经验。</p>
+  </li>
+  <li>
+    <a href="https://www.fenbi.com/" target="_blank"><strong>粉笔网</strong> (fenbi.com)</a>
+    <p>以优质的行测5000题和申论思维课著称，是目前主流的公考练习平台。</p>
+  </li>
+  <li>
+    <a href="https://www.offcn.com/" target="_blank"><strong>中公教育</strong> (offcn.com)</a>
+    <p>国内最早的公考培训机构之一，提供海量的资讯内容和历年分地区考情分析。</p>
+  </li>
 </ol>
 </div>
 
