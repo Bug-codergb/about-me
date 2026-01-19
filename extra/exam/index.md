@@ -25,6 +25,28 @@ aside: false
     <a href="https://github.com/hwlvipone/yunduanqiqu?tab=readme-ov-file" target="_blank"><strong>GitHub - Yunduanqiqu 考公资源仓库</strong></a>
     <p>云端奇趣整理的开源考公资源，包含大量精品笔记、脑图及备考手册。</p>
   </li>
+  <li>
+    <a href="https://bbs.qzzn.com/" target="_blank"><strong>公务员考试论坛</strong> (qzzn.com)</a>
+    <p>提供公务员考试的备考资源、真题解析、模拟试题等。</p>
+  </li>
+  <li>
+    <a href="https://github.com/coder2gwy/coder2gwy">
+      <strong>github 公务员</strong>
+    </a>
+    <p>coder2gwy</p>
+  </li>
+  <li>
+    <a href="https://github.com/miss-mumu/developer2gwy">
+      <strong>github 公务员备考指南</strong>
+    </a>
+    <p>developer2gwy</p>
+  </li>
+  <li>
+    <a href="https://github.com/kuriv/civil-service-exam">
+      <strong>行测知识点梳理</strong>
+    </a>
+    <p>civil-service-exam</p>
+  </li>
 </ol>
 </div>
 
