@@ -6,8 +6,8 @@ import AutoImport from 'unplugin-auto-import/vite'
 export default defineConfig({
   lang: 'zh-CN',
   base:"/about-me",
-  title: "codergb的知识库",
-  description: "记录学习历程",
+  title: "ff知识库",
+  description: "fff",
   head:[
     ['link', { rel: 'icon', href: '/about-me/favicon.ico' }], // 默认路径
   ],
