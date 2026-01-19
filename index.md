@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: 快速开始
-      link: /markdown-examples
+      link: /extra/exam/
     - theme: alt
       text: Github
       link: https://github.com/Bug-codergb
