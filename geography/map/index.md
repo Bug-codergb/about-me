@@ -76,7 +76,7 @@ onMounted(async () => {
   chartInstance = echarts.init(dom)
   chartInstance.showLoading()
   try {
-    const response = await axios.get('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json')
+    const response = await axios.get('/about-me/map.json')
     const geoJson = response.data
     chartInstance.hideLoading()
     echarts.registerMap('china', geoJson)
