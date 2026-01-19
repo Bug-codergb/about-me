@@ -1,11 +1,11 @@
-î
+---
 title: 考公避坑指南
 aside: false
 ---
 
 # 考公全流程避坑指南
 
-考公不仅是实力的较量，更是细节和规则的博弈。从报名到政审，每一个环节都有可能踩坑。
+考公不仅是实力的较量，更是细节 and 规则的博弈。从报名到政审，每一个环节都有可能踩坑。
 
 <div class="tip-container">
 
@@ -47,6 +47,25 @@ aside: false
 3.  **亲属限制**：
     *   **风险**：报考公检法系统，对直系亲属的考察异常严格。
 
+## 五、 档案查询全攻略 (寻宝指南)
+
+1.  **第一步：全国联网查询** (最快)
+    *   登录 [全国人社政务服务平台](http://zwfw.mohrss.gov.cn/)，在“就业创业”板块点击“跨省流动人员人事档案查询”。
+2.  **第二步：地方人才中心查询** (最准)
+    *   搜索你认为可能存放城市的人才网官网（如“苏州人才网”）。
+3.  **第三步：母校源头追溯**
+    *   联系大学档案馆或招生就业处，查询当年的“派发记录”和“机要单号”。
+4.  **第四步：回原籍寻找** (自动打回)
+    *   如果毕业时没管档案，通常会默认发往你**户籍所在地**的地级市人才中心。
+
+::: tip 个人档案存放备忘 (My Archive)
+*   **存放机构**：苏州市吴中区人力资源管理服务中心
+*   **存档性质**：个人委托
+*   **具体地址**：苏州吴中区越溪街道塔韵路 178 号人力资源大厦 5 楼
+*   **联系电话**：0512-65687721
+*   **注意事项**：保管费已取消(免费)。调档需通过“调档函”走机要通道，严禁个人提取。
+:::
+
 </div>
 
 <style scoped>
@@ -69,9 +88,10 @@ ul {
 li {
   margin-bottom: 20px;
   padding: 20px;
-  background: #121212;
+  background: #252525; /* 调整为更柔和的深灰色 */
   border-radius: 12px;
   border-left: 5px solid #f44336;
+  color: #ccc;
 }
 
 strong {
@@ -80,13 +100,27 @@ strong {
 }
 
 p {
-  color: #aaa;
+  color: #ddd;
   margin: 8px 0;
 }
 
 .tip-container li:hover {
-  background: #1a1a1a;
+  background: #333333; /* 悬停时稍微加亮 */
   transform: translateX(5px);
   transition: all 0.3s ease;
+  color: #fff;
+}
+
+.custom-block.tip {
+  background: rgba(64, 158, 255, 0.1);
+  border-left: 5px solid #409eff;
+  padding: 18px;
+  border-radius: 8px;
+  margin: 20px 0;
+  color: #eee;
+}
+
+.custom-block.tip p {
+  color: #eee;
 }
 </style>
