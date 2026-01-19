@@ -208,10 +208,20 @@ onBeforeUnmount(() => {
 }
 
 .info-card {
-  background: rgba(255,255,255,0.05);
+  background: #121212 !important; /* 强制使用深色背景，与长河图表一致 */
   padding: 24px;
   border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+  background: #1a1a1a !important;
+  border-color: rgba(76, 175, 80, 0.3) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
 }
 
 .info-card h3 {
