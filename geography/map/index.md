@@ -55,7 +55,14 @@ aside: false
         </div>
       </div>
       <div class="stats-total">共 34 个省级行政区</div>
+      <div id="area-rank-chart" style="width: 100%; height: 350px; margin-top: 20px; pointer-events: auto;"></div>
     </div><div id="map-container"></div>
+  </div>
+  <div class="full-area-section">
+    <div class="full-area-card">
+      <h3>省级行政区面积全排名 (单位：万km²)</h3>
+      <div id="full-area-chart" style="width: 100%; height: 1000px;"></div>
+    </div>
   </div>
 </ClientOnly>
 
@@ -64,9 +71,13 @@ import { onMounted, onBeforeUnmount } from 'vue'
 import axios from 'axios'
 
 let chartInstance = null
+let areaChartInstance = null
+let fullAreaChartInstance = null
 
 const resizeHandler = () => {
   chartInstance && chartInstance.resize()
+  areaChartInstance && areaChartInstance.resize()
+  fullAreaChartInstance && fullAreaChartInstance.resize()
 }
 
 onMounted(async () => {
@@ -93,46 +104,51 @@ onMounted(async () => {
       },
       tooltip: {
                 trigger: 'item',
-                formatter: function(params) {
-                    const provinceToCapital = {
-                        '北京': '北京', '北京市': '北京',
-                        '天津': '天津', '天津市': '天津',
-                        '河北': '石家庄', '河北省': '石家庄',
-                        '山西': '太原', '山西省': '太原',
-                        '内蒙古': '呼和浩特', '内蒙古自治区': '呼和浩特',
-                        '辽宁': '沈阳', '辽宁省': '沈阳',
-                        '吉林': '长春', '吉林省': '长春',
-                        '黑龙江': '哈尔滨', '黑龙江省': '哈尔滨',
-                        '上海': '上海', '上海市': '上海',
-                        '江苏': '南京', '江苏省': '南京',
-                        '浙江': '杭州', '浙江省': '杭州',
-                        '安徽': '合肥', '安徽省': '合肥',
-                        '福建': '福州', '福建省': '福州',
-                        '江西': '南昌', '江西省': '南昌',
-                        '山东': '济南', '山东省': '济南',
-                        '河南': '郑州', '河南省': '郑州',
-                        '湖北': '武汉', '湖北省': '武汉',
-                        '湖南': '长沙', '湖南省': '长沙',
-                        '广东': '广州', '广东省': '广州',
-                        '广西': '南宁', '广西壮族自治区': '南宁',
-                        '海南': '海口', '海南省': '海口',
-                        '重庆': '重庆', '重庆市': '重庆',
-                        '四川': '成都', '四川省': '成都',
-                        '贵州': '贵阳', '贵州省': '贵阳',
-                        '云南': '昆明', '云南省': '昆明',
-                        '西藏': '拉萨', '西藏自治区': '拉萨',
-                        '陕西': '西安', '陕西省': '西安',
-                        '甘肃': '兰州', '甘肃省': '兰州',
-                        '青海': '西宁', '青海省': '西宁',
-                        '宁夏': '银川', '宁夏回族自治区': '银川',
-                        '新疆': '乌鲁木齐', '新疆维吾尔自治区': '乌鲁木齐',
-                        '香港': '香港', '香港特别行政区': '香港',
-                        '澳门': '澳门', '澳门特别行政区': '澳门',
-                        '台湾': '台北', '台湾省': '台北'
-                    };
-                    const capital = provinceToCapital[params.name] || '';
-                    return capital ? `${params.name}(${capital})` : params.name;
-                }
+        formatter: function(params) {
+          const provinceInfo = {
+            '北京市': { abbr: '京', capital: '北京' },
+            '天津市': { abbr: '津', capital: '天津' },
+            '河北省': { abbr: '冀', capital: '石家庄' },
+            '山西省': { abbr: '晋', capital: '太原' },
+            '内蒙古自治区': { abbr: '蒙', capital: '呼和浩特' },
+            '辽宁省': { abbr: '辽', capital: '沈阳' },
+            '吉林省': { abbr: '吉', capital: '长春' },
+            '黑龙江省': { abbr: '黑', capital: '哈尔滨' },
+            '上海市': { abbr: '沪', capital: '上海' },
+            '江苏省': { abbr: '苏', capital: '南京' },
+            '浙江省': { abbr: '浙', capital: '杭州' },
+            '安徽省': { abbr: '皖', capital: '合肥' },
+            '福建省': { abbr: '闽', capital: '福州' },
+            '江西省': { abbr: '赣', capital: '南昌' },
+            '山东省': { abbr: '鲁', capital: '济南' },
+            '河南省': { abbr: '豫', capital: '郑州' },
+            '湖北省': { abbr: '鄂', capital: '武汉' },
+            '湖南省': { abbr: '湘', capital: '长沙' },
+            '广东省': { abbr: '粤', capital: '广州' },
+            '广西壮族自治区': { abbr: '桂', capital: '南宁' },
+            '海南省': { abbr: '琼', capital: '海口' },
+            '重庆市': { abbr: '渝', capital: '重庆' },
+            '四川省': { abbr: '川', capital: '成都' },
+            '贵州省': { abbr: '黔', capital: '贵阳' },
+            '云南省': { abbr: '滇', capital: '昆明' },
+            '西藏自治区': { abbr: '藏', capital: '拉萨' },
+            '陕西省': { abbr: '陕', capital: '西安' },
+            '甘肃省': { abbr: '甘', capital: '兰州' },
+            '青海省': { abbr: '青', capital: '西宁' },
+            '宁夏回族自治区': { abbr: '宁', capital: '银川' },
+            '新疆维吾尔自治区': { abbr: '新', capital: '乌鲁木齐' },
+            '香港特别行政区': { abbr: '港', capital: '香港' },
+            '澳门特别行政区': { abbr: '澳', capital: '澳门' },
+            '台湾省': { abbr: '台', capital: '台北' }
+          };
+          const info = provinceInfo[params.name];
+          if (info) {
+            return `<div style="font-weight:bold">${params.name}</div>
+                    简称：${info.abbr}<br/>
+                    省会：${info.capital}`;
+          }
+          return params.name;
+        }
             },
             // 视觉映射：用于自动分配 34 种不同的颜色
             visualMap: {
@@ -209,6 +225,102 @@ onMounted(async () => {
                 }
             ]
     })
+
+    // 初始化面积排名柱状图
+    const areaDom = document.getElementById('area-rank-chart')
+    if (areaDom) {
+      areaChartInstance = echarts.init(areaDom)
+      const areaData = [
+        { name: '新疆', value: 166 },
+        { name: '西藏', value: 122 },
+        { name: '内蒙古', value: 118 },
+        { name: '青海', value: 72 },
+        { name: '四川', value: 48.6 },
+        { name: '黑龙江', value: 47.3 },
+        { name: '甘肃', value: 42.6 },
+        { name: '云南', value: 39.4 },
+        { name: '广西', value: 23.6 },
+        { name: '湖南', value: 21.1 }
+      ].reverse()
+
+      areaChartInstance.setOption({
+        backgroundColor: 'transparent',
+        title: {
+          text: '面积排名前十 (万km²)',
+          left: 'center',
+          textStyle: { color: '#ffeb3b', fontSize: 13 }
+        },
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        grid: { left: '3%', right: '12%', bottom: '3%', top: '15%', containLabel: true },
+        xAxis: { type: 'value', axisLabel: { show: false }, splitLine: { show: false } },
+        yAxis: { 
+          type: 'category', 
+          data: areaData.map(i => i.name),
+          axisLabel: { color: '#fff', fontSize: 10 },
+          axisLine: { show: false },
+          axisTick: { show: false }
+        },
+        series: [{
+          name: '面积',
+          type: 'bar',
+          data: areaData.map(i => i.value),
+          itemStyle: {
+            color: new echarts.graphic.LinearGradient(1, 0, 0, 0, [
+              { offset: 0, color: '#ffeb3b' },
+              { offset: 1, color: '#fbc02d' }
+            ]),
+            borderRadius: [0, 10, 10, 0]
+          },
+          label: { show: true, position: 'right', color: '#ffeb3b', fontSize: 10 }
+        }]
+      })
+    }
+
+    // 初始化全省面积排名柱状图
+    const fullAreaDom = document.getElementById('full-area-chart')
+    if (fullAreaDom) {
+      fullAreaChartInstance = echarts.init(fullAreaDom)
+      const fullData = [
+        { name: '新疆', value: 166 }, { name: '西藏', value: 122 }, { name: '内蒙古', value: 118 },
+        { name: '青海', value: 72.2 }, { name: '四川', value: 48.6 }, { name: '黑龙江', value: 47.3 },
+        { name: '甘肃', value: 42.6 }, { name: '云南', value: 39.4 }, { name: '广西', value: 23.6 },
+        { name: '湖南', value: 21.1 }, { name: '陕西', value: 20.6 }, { name: '河北', value: 18.8 },
+        { name: '吉林', value: 18.7 }, { name: '湖北', value: 18.6 }, { name: '广东', value: 18.0 },
+        { name: '贵州', value: 17.6 }, { name: '江西', value: 16.7 }, { name: '河南', value: 16.7 },
+        { name: '山东', value: 15.7 }, { name: '山西', value: 15.6 }, { name: '辽宁', value: 14.8 },
+        { name: '安徽', value: 13.9 }, { name: '福建', value: 12.1 }, { name: '江苏', value: 10.7 },
+        { name: '浙江', value: 10.4 }, { name: '重庆', value: 8.2 }, { name: '宁夏', value: 6.6 },
+        { name: '台湾', value: 3.6 }, { name: '海南', value: 3.5 }, { name: '北京', value: 1.6 },
+        { name: '天津', value: 1.2 }, { name: '上海', value: 0.6 }, { name: '香港', value: 0.1 },
+        { name: '澳门', value: 0.003 }
+      ].reverse()
+
+      fullAreaChartInstance.setOption({
+        backgroundColor: 'transparent',
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        grid: { left: '3%', right: '10%', bottom: '3%', top: '2%', containLabel: true },
+        xAxis: { type: 'value', axisLabel: { color: '#999' }, splitLine: { lineStyle: { color: 'rgba(255,255,255,0.05)' } } },
+        yAxis: { 
+          type: 'category', 
+          data: fullData.map(i => i.name),
+          axisLabel: { color: '#fff', fontSize: 12 },
+          axisLine: { lineStyle: { color: 'rgba(255,255,255,0.1)' } }
+        },
+        series: [{
+          name: '面积',
+          type: 'bar',
+          data: fullData.map(i => i.value),
+          itemStyle: {
+            color: new echarts.graphic.LinearGradient(1, 0, 0, 0, [
+              { offset: 0, color: '#4caf50' },
+              { offset: 1, color: '#2e7d32' }
+            ]),
+            borderRadius: [0, 5, 5, 0]
+          },
+          label: { show: true, position: 'right', color: '#4caf50', fontSize: 11 }
+        }]
+      })
+    }
   } catch (error) {
     console.error('Failed to fetch GeoJSON data:', error)
     chartInstance.hideLoading()
@@ -221,6 +333,14 @@ onBeforeUnmount(() => {
   if (chartInstance) {
     chartInstance.dispose()
     chartInstance = null
+  }
+  if (areaChartInstance) {
+    areaChartInstance.dispose()
+    areaChartInstance = null
+  }
+  if (fullAreaChartInstance) {
+    fullAreaChartInstance.dispose()
+    fullAreaChartInstance = null
   }
 })
 </script>
@@ -241,7 +361,6 @@ onBeforeUnmount(() => {
   width: 100%;
   height: calc(100vh - 64px);
   background: #101f30;
-  overflow: hidden;
 }
 #map-container {
   width: 100%;
@@ -281,4 +400,29 @@ onBeforeUnmount(() => {
 .stats-value { color: #fff; font-size: 24px; font-weight: bold; display: block; }
 .stats-label { color: rgba(255, 255, 255, 0.5); font-size: 12px; }
 .stats-total { margin-top: 24px; color: rgba(255, 255, 255, 0.6); font-style: italic; font-size: 14px; }
+
+/* 全排名区域样式 */
+.full-area-section {
+  background: #0d1621;
+  padding: 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.full-area-card {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: rgba(16, 31, 48, 0.6);
+  padding: 30px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+.full-area-card h3 {
+  color: #ffeb3b;
+  font-size: 24px;
+  margin-top: 0;
+  margin-bottom: 30px;
+  text-align: center;
+  border-bottom: 2px solid rgba(255, 235, 59, 0.2);
+  padding-bottom: 15px;
+}
 </style>
